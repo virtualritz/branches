@@ -1,6 +1,6 @@
 [package]
 name = "branches"
-version = "0.2.2"
+version = "0.2.3"
 edition = "2018"
 authors = ["Khashayar Fereidani"]
 description = "Branch hinting prediction and control functions for stable Rust including likely, unlikely, assume and abort to help algorithm optimization"
@@ -14,6 +14,7 @@ readme = "README.md"
 [features]
 default = ["std"]
 std = []
+latest_nightly = []
 
 [build-dependencies]
 rustc_version = "0.4"

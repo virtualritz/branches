@@ -184,7 +184,12 @@ pub unsafe fn prefetch_read_data(addr: *const u8, locality: i32) {
         }
     }
     #[cfg(unstable)]
-    core::intrinsics::prefetch_read_data(addr, locality)
+    match locality {
+        0 => core::intrinsics::prefetch_read_data::<_, 0>(addr),
+        1 => core::intrinsics::prefetch_read_data::<_, 1>(addr),
+        2 => core::intrinsics::prefetch_read_data::<_, 2>(addr),
+        _ => core::intrinsics::prefetch_read_data::<_, 3>(addr),
+    }
 }
 
 /// Prefetches data for writing into the cache.
@@ -245,5 +250,10 @@ pub unsafe fn prefetch_write_data(addr: *const u8, locality: i32) {
         }
     }
     #[cfg(unstable)]
-    core::intrinsics::prefetch_write_data(addr, locality)
+    match locality {
+        0 => core::intrinsics::prefetch_write_data::<_, 0>(addr),
+        1 => core::intrinsics::prefetch_write_data::<_, 1>(addr),
+        2 => core::intrinsics::prefetch_write_data::<_, 2>(addr),
+        _ => core::intrinsics::prefetch_write_data::<_, 3>(addr),
+    }
 }
